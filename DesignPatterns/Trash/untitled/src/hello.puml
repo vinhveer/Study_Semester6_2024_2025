@@ -1,0 +1,19 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+interface IDongHocPhi
+abstract class SinhVien {
+    String ten, email
+    void dongHocPhi()
+    + {static} themMoi()
+    + {abstract} tinhDTB()
+}
+class SinhVienIT
+class MonHoc
+'Kế thừa'
+SinhVien <|-- SinhVienIT
+'Implement'
+IDongHocPhi <|.. SinhVien
+
+SinhVien o--> MonHoc: monHocDangKy
+@enduml
