@@ -1,0 +1,73 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class DataAccess {
+    - {static} DataAccess instance
+    - List<SanPham> danhSachSanPham
+
+    - DataAccess()
+    - {static} DataAccess getInstance()
+
+    + void themSanPham(SanPham sanPham)
+    + void xoaSanPham(SanPham sanPham)
+    + SanPham suaSanPham(SanPham sanPham)
+    + void getDanhSachSanPham()
+}
+
+class SanPham {
+    - String maSanPham
+    - String tenSanPham
+    - int soLuong
+    - double donGia
+    + SanPham(String maSanPham, String tenSanPham, int soLuong, double donGia)
+    + String getMaSanPham()
+    + void setMaSanPham(String maSanPham)
+    + String getTenSanPham()
+    + void setTenSanPham(String tenSanPham)
+    + int getSoLuong()
+    + void setSoLuong(int soLuong)
+    + double getDonGia()
+    + void setDonGia(double donGia)
+}
+
+class UI {
+    - DataAccess dataAccess
+
+    + UI(String type)
+
+    + void themSanPham(SanPham sanPham)
+    + void xoaSanPham(String maSanPham)
+    + void suaSanPham(SanPham sanPham)
+    + void hienThiSanPham()
+}
+
+class DataAccessType1 extends DataAccess {
+    - {static} DataAccess1 instance
+    DataAccessType1()
+    + {static} DataAccessType1 getInstance()
+}
+
+class DataAccessType2 extends DataAccess {
+    - {static} DataAccess2 instance
+    DataAccessType2()
+    + {static} DataAccessType2 getInstance()
+}
+
+class DataAccessFactory {
+    - {static} DataAccessFactory getDataAccess(String type)
+}
+
+class Main {}
+
+DataAccessType1 --|> DataAccess
+DataAccessType2 --|> DataAccess
+
+DataAccessFactory --> DataAccess
+DataAccessFactory --> DataAccessType1
+DataAccessFactory --> DataAccessType2
+
+UI --> DataAccess
+UI --> SanPham
+Main --> UI
+
+@enduml
