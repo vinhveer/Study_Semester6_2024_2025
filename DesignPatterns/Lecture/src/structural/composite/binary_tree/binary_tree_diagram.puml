@@ -1,27 +1,23 @@
 @startuml
 'https://plantuml.com/class-diagram
 
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
+abstract class Node {
+    int value;
 
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+    + void addLeftNode(Nut nut)
+    + void addRightNode(Nut nut)
+    + void removeLeftNode()
+    + void removeRightNode()
+    + void browseNode()
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
-}
+class NodeLa
+class NodeTrong
+
+Node <|-- NodeLa
+Node <|-- NodeTrong
+
+NodeTrong --> Node:left
+NodeTrong --> Node:right
 
 @enduml
