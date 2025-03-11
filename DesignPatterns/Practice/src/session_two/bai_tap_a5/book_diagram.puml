@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Chapter {
+    - String id
+    - String name
+}
+
+class Book {
+    - String title
+    - int numberOfPages
+    - String author
+    - List<Chapter> listChapters
+
+    #Book(Builder builder)
+}
+
+class Builder {
+    - String title
+    - int numberOfPages
+    - String author
+    - List<Chapter> listChapters
+
+    + Builder buildTitle(string title)
+    + Builder buildNumberOfPages(int numberOfPages)
+    + Builder buildAuthor(string author)
+    + Builder buildListChapters(Chapter chapter)
+
+    +Book build()
+}
+
+Book ..> Builder
+Chapter *--> Book
+
+@enduml

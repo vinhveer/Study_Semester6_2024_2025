@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class Product {
+    - int productId
+    - string productName
+}
+
+class OrderItem {
+    - Product product
+    - int quantity
+    - double unitPrice
+    - double discount
+
+    + float getTotalCost()
+}
+
+class OrderHeader {
+    - int orderId
+    - string orderDate
+    - string customerName
+}
+
+class Order {
+    OrderHeader orderHeader
+    List<OrderItem> orderItems
+
+    #Order(Builder builder)
+    + float getTotalAmout()
+}
+
+class Builder {
+    - OrderHeader orderHeader
+    - List<OrderItem> orderItem
+
+    + Builder buildOrderHeader(OrderHeader orderHeader)
+    + Builder buildOrder(OrderItem orderItem)
+
+    + Order build()
+}
+
+Order ..> Builder : creates
+Order --> OrderHeader : Header
+Order *--> OrderItem : OrderItem
+OrderItem --> Product
+Builder --> OrderHeader : Header
+Builder *--> OrderItem : OrderItem
+
+
+@enduml
