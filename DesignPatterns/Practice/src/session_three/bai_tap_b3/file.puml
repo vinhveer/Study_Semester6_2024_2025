@@ -1,0 +1,32 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class File {
+
+}
+
+class Folder {
+
+}
+
+abstract class AbstractFile {
+    + String name
+    + String path
+
+    ' Operations
+    + {abstract} String getStringTreeFolder()
+    + {abstract} String getPath(AbstractFile file)
+
+    ' Methods
+    + {abstract} AbstractFile addItem(AbstractFile file)
+    + {abstract} void removeItem(AbstractFile file)
+}
+
+File --|> AbstractFile
+Folder --|> AbstractFile
+
+AbstractFile <--* Folder : files "*"
+
+
+
+@enduml

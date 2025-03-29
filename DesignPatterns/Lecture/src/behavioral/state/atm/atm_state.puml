@@ -1,0 +1,28 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ATM {
+    + int soTien
+    + ATM()
+    + void napTien(int soTien)
+    + void rutTien()
+    + void setState(ATMState state)
+}
+
+interface ATMState {
+    + xuLyNapTien(ATM atm, int soTienNap)
+    + xuLyRutTien(ATM atm)
+}
+
+class SanSang
+
+class HanChe
+
+class HetTien
+
+ATM --> ATMState : state
+
+ATMState <|.. SanSang
+ATMState <|.. HanChe
+ATMState <|.. HetTien
+@enduml

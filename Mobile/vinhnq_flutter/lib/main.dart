@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:vinhnq_flutter/layout/page_listview.dart';
-import 'package:vinhnq_flutter/layout/page_gridview.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:thuc_hanh/page_home.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  await Supabase.initialize(
+    url: 'https://ahiymdsyusskhrbasqba.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFoaXltZHN5dXNza2hyYmFzcWJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDE5OTg3MjMsImV4cCI6MjA1NzU3NDcyM30.UxMANE_thxo753DRVaq2sHw5PltzhDqvtFuftuw06_E',
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -13,113 +17,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.lightBlue),
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
       ),
-      home: PageGridview(),
+      home: const PageHome(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  String message = "Duyên";
-  TextEditingController txtName = TextEditingController();
-  TextEditingController txtNgaySinh = TextEditingController();
-  String imageURL = "https://d1hjkbq40fs2x4.cloudfront.net/2016-01-31/files/1045.jpg";
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("My App"),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-        child: Center(child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 300, width: 400,
-              child: Image.network(imageURL),
-            ),
-            Text("Hello, world!", style: TextStyle(fontSize: 20),),
-            Text("Chào $message"),
-            TextField(
-              controller: txtName,
-              decoration: InputDecoration(
-                labelText: "Tên",
-                hintText: "Nhập tên vào đây"
-              ),
-            ),
-            TextField(
-              controller: txtNgaySinh,
-              decoration: InputDecoration(
-                labelText: "Ngày sinh",
-                hintText: "Nhập ngày sinh vào đây"
-              ),
-              keyboardType: TextInputType.datetime,
-            ),
-            ElevatedButton(
-              onPressed: () {
-                if (message == "Duyên")
-                  message = "Thuỷ";
-                else
-                  message = "Duyên";
-
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Column(
-                    children: [
-                      Text("Chào ${txtName.text}"),
-                      Text("Chúc mừng sinh nhật bạn: ${txtNgaySinh.text}")
-                    ],
-                  ))
-                );
-                setState(() {});
-              },
-              child: Text("Click me!"),
-
-            ),
-            Row (
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    height: 100,
-                    color: Colors.lightBlue,
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    height: 100,
-                    color: Colors.orange,
-                  ),
-                )
-              ],
-            )
-          ],
-        )),
-      ),
-      )
-    );
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    txtName.text = "CC";
-    txtNgaySinh.text = "8/3/2004";
-  }
-}

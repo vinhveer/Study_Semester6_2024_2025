@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+class MonHoc {
+    int soTinChi
+    int hocPhi
+
+}
+
+class KeHoachChung
+abstract class KeHoachHocTap {
+    String ten
+    + {abstract} KeHoachHocTap them(KeHoachHocTap keHoachHocTap)
+    + {abstract} void xoa(KeHoachHocTap keHoachHocTap)
+    + {abstract} int getHocPhi()
+    + {abstract} int getSoTinChi()
+    + {abstract} String thongTin()
+}
+
+KeHoachHocTap <|-- KeHoachChung
+KeHoachHocTap <|-- MonHoc
+KeHoachChung *---> "*" KeHoachHocTap : keHoachHocTaps
+
+@enduml

@@ -1,0 +1,5 @@
+{
+    "editor.suggestOnTriggerCharacters": false,
+    "editor.parameterHints.enabled": false,
+    "C_Cpp.default.compilerPath": "C:/Application/TDM-GCC-64/bin/g++.exe"
+}

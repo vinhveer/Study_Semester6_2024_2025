@@ -17,7 +17,7 @@ class NodeTrong
 Node <|-- NodeLa
 Node <|-- NodeTrong
 
-NodeTrong --> Node:left
-NodeTrong --> Node:right
+NodeTrong *--> Node:left
+NodeTrong *--> Node:right
 
 @enduml

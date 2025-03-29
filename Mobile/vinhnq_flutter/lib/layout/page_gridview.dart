@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:vinhnq_flutter/layout/page_chi_tiet.dart';
-import 'package:vinhnq_flutter/layout/page_listview.dart';
+import 'package:thuc_hanh/layout/page_chi_tiet.dart';
+import 'package:thuc_hanh/layout/page_listview.dart';
 
 class PageGridview extends StatefulWidget {
   const PageGridview({super.key});
@@ -24,7 +24,7 @@ class _PageGridviewState extends State<PageGridview> {
               children: [
                 Icon(Icons.shopping_cart, color: Colors.red, size: 40),
                 Padding(padding: const EdgeInsets.only(left: 14, top: 1),
-                child: Text("${count}", style: TextStyle(color: Colors.white)),)
+                child: Text("$count", style: TextStyle(color: Colors.white)),)
               ],
             ),
           ],
