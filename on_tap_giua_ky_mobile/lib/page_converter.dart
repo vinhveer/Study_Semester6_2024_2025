@@ -8,24 +8,13 @@ class PageConverter extends StatefulWidget {
 }
 
 class _PageConverterState extends State<PageConverter> {
-  final List<String> result = ["Không có kết quả"];
-
   final TextEditingController centimetController = TextEditingController();
   final TextEditingController inchController = TextEditingController();
-
-  void centimetToInch() {
-    double centimet = double.tryParse(centimetController.text) ?? 0;
-    double inch = centimet * 2.54;
-
-    setState(() {
-      inchController.text = inch.toStringAsFixed(2);
-      updateResult(centimet, inch);
-    });
-  }
+  final List<String> result = ["Không có kết quả"];
 
   void inchToCentimet() {
     double inch = double.tryParse(inchController.text) ?? 0;
-    double centimet = inch / 2.54;
+    double centimet = inch * 2.54;
 
     setState(() {
       centimetController.text = centimet.toStringAsFixed(2);
@@ -33,14 +22,24 @@ class _PageConverterState extends State<PageConverter> {
     });
   }
 
+  void centimetToInch() {
+    double centimet = double.tryParse(centimetController.text) ?? 0;
+    double inch = centimet / 2.54;
+
+    setState(() {
+      inchController.text = inch.toStringAsFixed(2);
+      updateResult(centimet, inch);
+    });
+  }
+
   void updateResult(double centimet, double inch) {
-    String centimetStatus = "${centimet.toStringAsFixed(2)} centimet = ${inch.toStringAsFixed(2)} inch";
-    String inchStatus = "${inch.toStringAsFixed(2)} inch = ${centimet.toStringAsFixed(2)} centimet";
+    String centimetResult = "${centimet.toStringAsFixed(2)} cm = ${inch.toStringAsFixed(2)} inch";
+    String inchResult = "${inch.toStringAsFixed(2)} inch = ${centimet.toStringAsFixed(2)}";
 
     setState(() {
       result.clear();
-      result.add(centimetStatus);
-      result.add(inchStatus);
+      result.add(centimetResult);
+      result.add(inchResult);
     });
   }
 
@@ -52,22 +51,22 @@ class _PageConverterState extends State<PageConverter> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Container(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(15),
         child: Column(
           children: [
             Row(
               children: [
                 Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Centimet"),
-                        TextField(
-                          controller: centimetController,
-                          keyboardType: TextInputType.number,
-                        )
-                      ],
-                    )
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Centimet"),
+                      TextField(
+                        controller: centimetController,
+                        keyboardType: TextInputType.number,
+                      )
+                    ],
+                  ),
                 ),
                 Expanded(
                   child: Column(
@@ -88,39 +87,46 @@ class _PageConverterState extends State<PageConverter> {
                   ),
                 ),
                 Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Inch"),
-                        TextField(
-                          controller: inchController,
-                          keyboardType: TextInputType.number,
-                        )
-                      ],
-                    )
-                )
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Inch"),
+                      TextField(
+                        controller: inchController,
+                        keyboardType: TextInputType.number,
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
+            SizedBox(height: 50,),
             Row(
               children: [
-                SizedBox(height: 90,),
-                Text("Kết quả tính toán", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),),
-                SizedBox(height: 90,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Kết quả tính toán", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),),
+                  ],
+                ),
               ],
             ),
+            SizedBox(height: 20,),
             Expanded(
               child: ListView.separated(
-                itemBuilder: (context, index) => ListTile(
-                  title: Text(result[index]),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 0),
-                ),
-                separatorBuilder: (context, index) => Divider(),
-                itemCount: result.length
+                  itemBuilder: (context, index) {
+                    return ListTile(
+                      title: Text(result[index]),
+                      contentPadding: EdgeInsets.symmetric(horizontal: 0),
+                    );
+                  },
+                  separatorBuilder: (context, index) => Divider(),
+                  itemCount: result.length
               )
             )
           ],
         ),
-      )
+      ),
     );
   }
 }

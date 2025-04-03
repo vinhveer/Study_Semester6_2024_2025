@@ -11,13 +11,12 @@ class PageStudent extends StatefulWidget {
 
 class _PageStudentState extends State<PageStudent> {
   final StudentController studentController = Get.put(StudentController());
-  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Quản lý học sinh"),
+        title: Text("Quản lý học sinh"),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
       body: Container(
@@ -25,21 +24,23 @@ class _PageStudentState extends State<PageStudent> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Tên môn học"),
+            Text("Môn học"),
             TextField(
               controller: studentController.subjectController,
             ),
-            SizedBox(height: 30),
-            Text("Số tín chỉ"),
+            SizedBox(height: 30,),
+            Text("Số tín chỉ"),
             TextField(
               controller: studentController.creditController,
+              keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 30),
-            Text("Học phí"),
+            SizedBox(height: 30,),
+            Text("Học phí̉"),
             TextField(
               controller: studentController.feeController,
+              keyboardType: TextInputType.number,
             ),
-            SizedBox(height: 30),
+            SizedBox(height: 30,),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
@@ -47,50 +48,41 @@ class _PageStudentState extends State<PageStudent> {
                     onPressed: () {
                       studentController.addStudent();
                     },
-                    child: Text("Thêm học sinh")
+                    child: Text("Thêm học sinh mới")
                 )
               ],
             ),
             Expanded(
               child: GetBuilder<StudentController>(
-                init: studentController,
-                builder: (controller) {
-                  return ListView.separated(
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(controller.students[index].subject),
-                          subtitle: Text("Học phí: ${controller.students[index].fee} VNĐ"),
-                          leading: Text("${index + 1}"),
-                          trailing: Text("Số tín chỉ: ${controller.students[index].credit}"),
-                        );
-                      },
-                      separatorBuilder: (context, index) => Divider(),
-                      itemCount: controller.students.length
-                  );
-                },
+                  init: studentController,
+                  builder: (controller) {
+                    return ListView.separated(
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            leading: Text("${index + 1}"),
+                            title: Text(controller.students[index].subject),
+                            subtitle: Text("Học phí: " + controller.students[index].fee),
+                            trailing: Text("Số tín chỉ: " + controller.students[index].credit),
+                          );
+                        },
+                        separatorBuilder: (context, index) => Divider(),
+                        itemCount: controller.students.length
+                    );
+                  },
               ),
-            ),
+            )
           ],
         ),
       ),
       bottomNavigationBar: GetBuilder<StudentController>(
           init: studentController,
-        builder: (controller) {
-          return Container(
-            height: 80,
-            padding: EdgeInsets.all(15),
-            child: Column(
-              children: [
-                Divider(),  // Divider ở trên Text
-                Row(
-                  children: [
-                    Text("Danh sách có ${controller.students.length} sinh viên"),
-                  ],
-                ),
-              ],
-            ),
-          );
-        },
+          builder: (controller) {
+            return Container(
+              height: 70,
+              padding: EdgeInsets.all(20),
+              child: Text("Danh sách có ${controller.students.length} sinh viên"),
+            );
+          },
       )
     );
   }
