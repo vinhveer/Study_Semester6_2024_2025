@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:on_tap_giua_ky_mobile/student_controller.dart';
+import 'package:on_tap_giua_ky_mobile/student/student_controller.dart';
 
 class PageStudent extends StatefulWidget {
   const PageStudent({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:on_tap_giua_ky_mobile/page_converter.dart';
-import 'package:on_tap_giua_ky_mobile/page_student.dart';
+import 'package:on_tap_giua_ky_mobile/converter/converter.dart';
+import 'package:on_tap_giua_ky_mobile/product/page_product.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blueAccent),
       ),
-      home: PageStudent(),
+      home: Converter(),
     );
   }
 }
