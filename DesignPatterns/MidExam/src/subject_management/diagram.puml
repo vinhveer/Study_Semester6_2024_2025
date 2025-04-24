@@ -1,11 +1,26 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-autonumber
+abstract class StudyPlan {
+    String name
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+    + {abstract} void addStudyPlan(StudyPlan studyPlan)
+    + {abstract} void removeStudyPlan(StudyPlan studyPlan)
+    + {abstract} String getStudyPlanTree()
+    + {abstract} int getCredit()
+    + {abstract} int getFee()
+}
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+class TimeLine
+
+class Subject {
+    int credit
+    int fee
+}
+
+Subject --|> StudyPlan
+StudyPlan <|-- TimeLine
+
+StudyPlan <---* "*" TimeLine : "studyPlans"
+
 @enduml

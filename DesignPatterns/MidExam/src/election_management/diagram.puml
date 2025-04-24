@@ -1,11 +1,29 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-autonumber
+class User {
+    + String name
+    + void vote(Candidate candidate)
+}
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+enum Candidate {
+    JoeBiden,
+    DonaldTrump
+}
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+class Election {
+    - {static} Election instance
+    - int joeBidenVoteCount
+    - int donaldTrumpVoteCount
+    - Election()
+    - Election getInstance()
+
+    + void vote(User user, Candidate candidate)
+    + void printResult()
+}
+
+User ..> Election
+
+
+
 @enduml

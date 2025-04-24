@@ -16,7 +16,5 @@ public class File extends AbstractFile {
     }
 
     @Override
-    public void removeItem(AbstractFile file) {
-
-    }
+    public void removeItem(AbstractFile file) {}
 }

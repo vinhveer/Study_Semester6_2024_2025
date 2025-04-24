@@ -86,7 +86,6 @@ class _PageProductState extends State<PageProduct> {
                   ],
                 ),
               ),
-              SizedBox(height: 30,)
             ],
           ),
         ),

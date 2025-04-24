@@ -8,6 +8,7 @@ import 'package:thuc_hanh/json/page_albums.dart';
 import 'package:thuc_hanh/layout/page_gridview.dart';
 import 'package:thuc_hanh/layout/page_listview.dart';
 import 'package:thuc_hanh/page_hello.dart';
+import 'package:thuc_hanh/permisssion/test_grant_permission.dart';
 import 'package:thuc_hanh/profile/page_profile.dart';
 import 'package:thuc_hanh/rss/pages/page_rss.dart';
 
@@ -25,6 +26,7 @@ class PageHome extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [
+          buildListItem(context, title: "Quyền Camera", destination: PageGrantPermission()),
           buildListItem(context, title: "Hồ sơ của tôi", destination: MyProfile()),
           buildListItem(context, title: "Hello, world!", destination: PageHello()),
           buildListItem(context, title: "Danh sách trái cây (List Views)", destination: PageListview()),
