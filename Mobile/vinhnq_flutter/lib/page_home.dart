@@ -4,6 +4,7 @@ import 'package:thuc_hanh/app_state/getx/getx_myapp.dart';
 import 'package:thuc_hanh/app_state/getx/getx_simple_state.dart';
 import 'package:thuc_hanh/commercial_app/admin_pages/page_fruit_admin.dart';
 import 'package:thuc_hanh/commercial_app/app_fruit_store.dart';
+import 'package:thuc_hanh/commercial_app/page_auth_user.dart';
 import 'package:thuc_hanh/json/page_albums.dart';
 import 'package:thuc_hanh/layout/page_gridview.dart';
 import 'package:thuc_hanh/layout/page_listview.dart';
@@ -27,6 +28,7 @@ class PageHome extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [
+          buildListItem(context, title: "Login", destination: PageAuthUser()),
           buildListItem(context, title: "Get Storage", destination: PageGetStorage()),
           buildListItem(context, title: "Quyền", destination: PageGrantPermission()),
           buildListItem(context, title: "Hồ sơ của tôi", destination: MyProfile()),

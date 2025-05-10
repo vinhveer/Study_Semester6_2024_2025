@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:thuc_hanh/commercial_app/page_auth_user.dart';
 import 'package:thuc_hanh/commercial_app/page_chi_tiet.dart';
 import 'controller/controller_fruit_realtime.dart';
+import 'model/supabase_helper.dart';
 
 class AppFruitStore extends StatelessWidget {
   const AppFruitStore({super.key});
@@ -47,6 +49,32 @@ class PageHomeFruitStore extends StatelessWidget {
           ),
           SizedBox(width: 20), // Đã sửa height thành width
         ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          children: [
+            GetBuilder<ControllerFruit>(
+                id: "drawer_header",
+                init: ControllerFruit.get(),
+                builder: (controller) => UserAccountsDrawerHeader(
+                    accountName: Text("Welcome back!"),
+                    accountEmail: Text("${reponse?.user?.email ?? "Chưa đăng nhập"}")
+                ),
+            ),
+            Column(
+              children: [
+                IconButton(
+                    onPressed: () async {
+                      await supabase.auth.signOut();
+                      reponse = null;
+                      ControllerFruit.get().auth();
+                    },
+                    icon: Icon(Icons.logout)
+                )
+              ],
+            )
+          ],
+        ),
       ),
       body: GetBuilder<ControllerFruit>(
         id: "fruits",

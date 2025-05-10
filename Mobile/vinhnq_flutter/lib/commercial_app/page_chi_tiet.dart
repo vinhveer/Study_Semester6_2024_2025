@@ -4,9 +4,10 @@ import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:thuc_hanh/commercial_app/model/model.dart';
+import 'package:thuc_hanh/commercial_app/page_auth_user.dart';
 import 'controller/controller_fruit_realtime.dart';
-
 
 class PageChiTietFruit extends StatelessWidget {
   PageChiTietFruit({super.key, required this.fruit});
@@ -80,8 +81,14 @@ class PageChiTietFruit extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            ControllerFruit.get().themMatHangVaoGioHang(fruit);
+          onPressed: () async {
+            if (reponse?.session != null && reponse?.user != null) {
+              ControllerFruit.get().themMatHangVaoGioHang(fruit);
+            } else {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => PageAuthUser(),));
+            }
+
+            ControllerFruit.get().auth();
           },
           child: Icon(Icons.add_shopping_cart),
       ),

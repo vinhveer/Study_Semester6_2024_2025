@@ -46,7 +46,7 @@ class _PageFruitUpdateState extends State<PageFruitUpdate> {
                 children: [
                   ElevatedButton(
                       onPressed: () async {
-                        if (await requestPermission(Permission.photos)) {
+                        // if (await requestPermission(Permission.photos)) {
                           ImagePicker imagePicker = ImagePicker();
                           var image = await imagePicker.pickImage(source: ImageSource.gallery);
 
@@ -55,7 +55,9 @@ class _PageFruitUpdateState extends State<PageFruitUpdate> {
                               _xFile = image;
                             });
                           }
-                        }
+                        // } else {
+                        //   showConfirmDialog(context, "Bạn cần cấp quyền truy cập ảnh");
+                        // }
                       },
                       child: Text("Chọn ảnh")
                   )
@@ -122,8 +124,12 @@ class _PageFruitUpdateState extends State<PageFruitUpdate> {
                         fruit.gia = int.parse(txtGia.text);
                         fruit.moTa = txtMoTa.text;
 
-                        await FruitSnapShot.update(fruit);
-
+                        try {
+                          await FruitSnapShot.update(fruit);
+                        } catch (e) {
+                          showSnackBar(context, message: "Cập nhật thất bại");
+                        }
+                        
                         showSnackBar(context, message: "Cập nhật thành công");
                       },
                       child: Text("Lưu thông tin")

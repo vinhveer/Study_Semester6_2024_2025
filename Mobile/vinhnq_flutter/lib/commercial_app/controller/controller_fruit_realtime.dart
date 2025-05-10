@@ -32,6 +32,10 @@ class ControllerFruit extends GetxController {
     update(['gh']);
   }
 
+  void auth() {
+    update(['drawer_header']);
+  }
+
   @override
   void onClose() {
     // TODO: implement onClose
