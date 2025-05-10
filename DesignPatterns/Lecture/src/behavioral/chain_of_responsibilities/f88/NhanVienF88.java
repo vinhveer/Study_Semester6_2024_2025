@@ -1,4 +1,4 @@
-package behavioral.chain_of_responsibilities;
+package behavioral.chain_of_responsibilities.f88;
 
 public abstract class NhanVienF88 {
     String chucVu;

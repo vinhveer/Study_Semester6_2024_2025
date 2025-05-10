@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:thuc_hanh/app_state/getx_lecture_2/app_getx.dart';
 import 'package:thuc_hanh/app_state/getx/getx_myapp.dart';
 import 'package:thuc_hanh/app_state/getx/getx_simple_state.dart';
+import 'package:thuc_hanh/commercial_app/admin_pages/page_fruit_admin.dart';
 import 'package:thuc_hanh/commercial_app/app_fruit_store.dart';
-import 'package:thuc_hanh/commercial_app/page_fruit_stream.dart';
 import 'package:thuc_hanh/json/page_albums.dart';
 import 'package:thuc_hanh/layout/page_gridview.dart';
 import 'package:thuc_hanh/layout/page_listview.dart';
+import 'package:thuc_hanh/local_storage/page_get_storage.dart';
 import 'package:thuc_hanh/page_hello.dart';
 import 'package:thuc_hanh/permisssion/test_grant_permission.dart';
 import 'package:thuc_hanh/profile/page_profile.dart';
@@ -26,7 +27,8 @@ class PageHome extends StatelessWidget {
       body: ListView(
         padding: EdgeInsets.all(16.0),
         children: [
-          buildListItem(context, title: "Quyền Camera", destination: PageGrantPermission()),
+          buildListItem(context, title: "Get Storage", destination: PageGetStorage()),
+          buildListItem(context, title: "Quyền", destination: PageGrantPermission()),
           buildListItem(context, title: "Hồ sơ của tôi", destination: MyProfile()),
           buildListItem(context, title: "Hello, world!", destination: PageHello()),
           buildListItem(context, title: "Danh sách trái cây (List Views)", destination: PageListview()),
@@ -36,7 +38,7 @@ class PageHome extends StatelessWidget {
           buildListItem(context, title: "GetX App", destination: AppGetX()),
           buildListItem(context, title: "Page Albums", destination: PageAlbums()),
           buildListItem(context, title: "Fruit App E-Com", destination: AppFruitStore()),
-          buildListItem(context, title: "Fruit App E-Com Admin", destination: PageFruitStream()),
+          buildListItem(context, title: "Fruit App E-Com Admin", destination: PageFruitAdmin()),
           buildListItem(context, title: "RSS", destination: PageRss())
         ],
       ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:thuc_hanh/commercial_app/model/supabase_helper.dart';
 
@@ -46,8 +48,9 @@ class Fruit {
 }
 
 class FruitSnapShot {
-  static Future<void> update(Fruit newFruit) async{
-    final supabase = Supabase.instance.client;
+  static final supabase = Supabase.instance.client;
+
+  static Future<void> update(Fruit newFruit) async {
     await supabase
         .from('Fruit')
         .update(newFruit.toMap())
@@ -56,17 +59,17 @@ class FruitSnapShot {
     await deleteImage(bucket: "image", path: "fruit_$id");
   }
 
-  static Future<void> insert(Fruit fruit) async{
-    final supabase = Supabase.instance.client;
+  static Future<void> insert(Fruit fruit) async {
     await supabase.from('Fruit').insert(fruit.toMap());
-
   }
-  static Future<void> delete(int id) async{
-    final supabase = Supabase.instance.client;
+
+  static Future<void> delete(int id) async {
     await supabase
         .from('Fruit')
         .delete()
         .eq('id', id);
+
+    await deleteImage(bucket: "images", path: "fruits/fruit_${id}.jpg");
   }
 
   static List<Fruit> getAll() {
@@ -74,33 +77,19 @@ class FruitSnapShot {
   }
 
   static Future<Map<int, Fruit>> getFruit() async {
-    final supabase = Supabase.instance.client;
     var response = await supabase.from("Fruit").select();
-
     List<Map<String, dynamic>> fruitData = List<Map<String, dynamic>>.from(response);
-
     var iterable = fruitData.map((e) => Fruit.fromMap(e));
-
     Map<int, Fruit> map = { for (var fruit in iterable) fruit.id : fruit };
-
     return map;
   }
 
   static Stream<List<Fruit>> getFruitStream() {
     return getDataStream<Fruit>(
-      table: "Fruit", ids: ["id"],
-      fromJson: (json) => Fruit.fromMap(json)
+        table: "Fruit",
+        ids: ["id"],
+        fromJson: (json) => Fruit.fromMap(json)
     );
-
-    // var stream = supabase.from("Fruit").stream(primaryKey: ["id"]);
-    // return stream.map((maps) => maps.map(
-    //     (e) => Fruit.fromMap(e)
-    // ).toList());
-
-    // return supabase
-    //     .from("Fruit")
-    //     .stream(primaryKey: ["id"])
-    //     .map((data) => data.map((item) => Fruit.fromMap(item)).toList());
   }
 
   static Future<Map<int, Fruit>> getMapFruit() async {
@@ -122,8 +111,13 @@ class FruitSnapShot {
   }
 
   static unsubscribeListenFruitChange() {
-    final supabase = Supabase.instance.client;
     supabase.channel('public:Fruit').unsubscribe();
+  }
+
+  // Áp dụng các hàm từ supabase_helper
+  static Future<String> uploadFruitImage({required File image, required int fruitId}) async {
+    String path = "fruit_$fruitId";
+    return await uploadImage(image: image, bucket: "images", path: path, upsert: true);
   }
 }
 

@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class ChuoiMenhGiaFactory {
+    + MenhGiaHandler getChuoiMenhGia(int menhGia)
+    + void rutTien(int soTien, int menhGiaCaoNhat)
+}
+
+class ChuoiMenhGiaVND {
+}
+
+abstract class MenhGiaHandler {
+    - int giaTri
+    - MenhGiaHandler keTiep
+    + MenhGiaHandler thietLapKeTiep(MenhGiaHandler menhGiaHandler)
+    + void rutTien(int soTien)
+}
+
+class MenhGiaThapNhat {
+    + void rutTien(int soTien)
+}
+
+class MenhGia {
+    + void rutTien(int soTien)
+}
+
+ChuoiMenhGiaFactory <|-- ChuoiMenhGiaVND
+
+MenhGiaHandler <|-- MenhGiaThapNhat
+MenhGiaHandler <|-- MenhGia
+
+MenhGiaHandler --> MenhGiaHandler : "keTiep"
+
+ChuoiMenhGiaVND *--> MenhGiaHandler : " m1 \n m2 "
+
+@enduml

@@ -1,4 +1,4 @@
-package behavioral.chain_of_responsibilities;
+package behavioral.chain_of_responsibilities.f88;
 
 public class NhanVienChoVayF88 extends NhanVienF88 {
     NhanVienF88 capTren;

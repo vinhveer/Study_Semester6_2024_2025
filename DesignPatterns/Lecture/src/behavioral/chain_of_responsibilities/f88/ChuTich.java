@@ -1,4 +1,4 @@
-package behavioral.chain_of_responsibilities;
+package behavioral.chain_of_responsibilities.f88;
 
 public class ChuTich extends NhanVienF88 {
     public ChuTich(String chucVu, String ten, int hanMucDuyetVay) {
