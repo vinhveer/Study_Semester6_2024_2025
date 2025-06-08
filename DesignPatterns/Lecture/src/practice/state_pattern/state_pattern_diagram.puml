@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class ThueBao {
+    String ten
+    int soDu
+
+    + void napTien(int soTien)
+    + void goiDien(int soPhut)
+    + void inThongTin()
+    + void setState(IState state)
+}
+
+interface IState {
+    + void xuLyNapTien(int soTien, ThueBao tb)
+    + void xuLyGoiDien(int soPhut, ThueBao tb)
+    + void xuLyInThongTin(ThueBao tb)
+}
+
+class NormalState {
+
+}
+
+class SilverState {
+
+}
+
+class GoldState {
+
+}
+
+NormalState ..|> IState
+SilverState ..|> IState
+GoldState ..|> IState
+IState <-- ThueBao : state
+
+@enduml

@@ -1,0 +1,40 @@
+@startuml
+'https://plantuml.com/class-diagram
+class MatHang {
+    String ten
+    float gia
+    int soLuong
+}
+
+' Context
+class GioHang {
+    List<MatHang> dsmh
+    + void ThanhToan()
+}
+
+' Statery
+interface IThanhToan {
+    + float thanhToan(float soTien)
+}
+
+class COD
+class Airpay
+
+' Context
+interface IKhuyenMai {
+    + float khuyenMai(float soTien)
+}
+
+class KhuyenMai
+
+GioHang *--> MatHang : "dsmh"
+GioHang --> IThanhToan
+GioHang --> IKhuyenMai
+
+COD --|> IThanhToan
+Airpay --|> IThanhToan
+
+KhuyenMai --|> IKhuyenMai
+
+
+@enduml

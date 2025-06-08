@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class News {
+    int id
+    String content
+}
+
+class Topic {
+    + void attach(ITopicListener listener)
+    + void detach(ITopicListener listener)
+    + void insert(String content)
+    + void update(News n)
+}
+
+interface ITopicListener {
+    + void insertListen(News n)
+    + void updateListen(News n)
+}
+
+class Member
+class MemberA
+class MemberB
+
+Topic o--> ITopicListener : listener
+ITopicListener <|.. Member
+Member --> Topic : topic
+
+Member <|-- MemberA
+Member <|-- MemberB
+
+Topic *--> News : news
+MemberB *--> News : news
+
+@enduml

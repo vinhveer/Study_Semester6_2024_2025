@@ -1,0 +1,30 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+' Subject
+class PlayerData {
+    String thoiGian
+    int countDown
+    int grade
+
+    + void setThoiGian(int thoiGian)
+    + void setDiemSo(int diemSo)
+    + void setSoLuotChoi(int soLuotChoi)
+
+    + void addEvent()
+    + void addListener(IMyStreamListener listener)
+}
+
+interface IPlayerDataListener {
+    + void listen(PlayerData data)
+}
+
+' Observer
+class Dashboard {
+}
+
+PlayerData --> IPlayerDataListener : "listener"
+Dashboard --> PlayerData : "playerData"
+Dashboard ..|> IPlayerDataListener
+
+@enduml

@@ -1,0 +1,29 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface ImageProcess {
+    void process()
+}
+
+class BasicProcess {
+    String path;
+}
+class ImageDecorator
+
+ImageProcess <|.. BasicProcess
+ImageProcess <|.. ImageDecorator
+ImageDecorator --> ImageProcess : image
+
+ImageDecorator <|-- BorderDecorator
+ImageDecorator <|-- WatermarkDecorator
+ImageDecorator <|-- FilterDecorator
+
+
+note bottom of BorderDecorator
+    Phương thức Process:
+        image.process()
+        in: "Thêm border"
+end note
+
+' Có 4 bài: Code Baverage, Biểu thức, Tokenreconize, ImageProcess
+@enduml
