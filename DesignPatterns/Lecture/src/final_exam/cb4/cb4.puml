@@ -1,0 +1,20 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+' Handler
+class ThanhPhanChuoi {
+    String tenGiai
+    List<String> boSoTrungThuong
+
+    + {abstract} ThanhPhanChuoi thietLapKeTiep(ThanhPhanChuoi k)
+    + {abstract} String doVeSo(String veSo)
+}
+
+class GiaiThapNhat
+class GiaiThuong
+
+GiaiThapNhat --|> ThanhPhanChuoi
+GiaiThuong --|> ThanhPhanChuoi
+GiaiThuong --> ThanhPhanChuoi : keTiep
+
+@enduml

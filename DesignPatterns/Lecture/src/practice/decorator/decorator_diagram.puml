@@ -8,7 +8,7 @@ interface ImageProcess {
 class BasicProcess {
     String path;
 }
-class ImageDecorator
+abstract class ImageDecorator
 
 ImageProcess <|.. BasicProcess
 ImageProcess <|.. ImageDecorator

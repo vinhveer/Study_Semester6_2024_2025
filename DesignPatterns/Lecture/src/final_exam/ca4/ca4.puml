@@ -1,6 +1,46 @@
 @startuml
 'https://plantuml.com/class-diagram
 
+class News {
+    - int id
+    - String title
+}
+
+' Subject
+class Topic {
+    - List<ITopicListener> listeners
+    - List<News> listNews
+
+    + void attach(ITopicListener listener)
+    + void dettach(ITopicListener listener)
+    + void insert(News news)
+    + void update(News news)
+}
+
+' Listener
+interface ITopicListener {
+    void onInsert(News news)
+    void onUpdate(News news)
+}
+
+' Observer
+abstract class Member {
+    string name
+    Topic topic
+}
+
+class MemberA {}
+class MemberB {
+    - List<News> receivedNews;
+}
+
+Topic *--> News
+Topic o--> ITopicListener
+Member --> Topic
+Member ..|> ITopicListener
+MemberA --|> Member
+MemberB --|> Member
+MemberB *--> News
 
 
 @enduml
