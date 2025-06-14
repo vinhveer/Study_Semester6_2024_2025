@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Widget {
+    void build()
+}
+
+class Button
+class Text
+
+abstract class LayoutDecorator
+
+class Padding
+class Container
+class Center
+
+Button ..|> Widget
+Text ..|> Widget
+
+LayoutDecorator ..|> Widget
+LayoutDecorator --> Widget : child
+Padding --|> LayoutDecorator
+Container --|> LayoutDecorator
+Center --|> LayoutDecorator
+
+@enduml

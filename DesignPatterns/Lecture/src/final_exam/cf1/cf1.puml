@@ -1,0 +1,21 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class RemoteControl {
+    RemoteControlState remoteControlState
+    void power()
+}
+
+interface RemoteControlState {
+    void onPower()
+}
+
+class OnState
+
+class OffState
+
+RemoteControl --> RemoteControlState : state
+RemoteControlState ..|> OnState
+RemoteControlState ..|> OffState
+
+@enduml
